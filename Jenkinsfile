@@ -3,7 +3,8 @@ APPALINCE_IP = 'initial_value'
 pipeline {
     agent { label 'master' }
     parameters {
-        string(name: 'AD_IP_2019', defaultValue: '10.3.69.70', description: 'Windows AD 2019 Server IP')
+        string(name: 'fc_bn', defaultValue: '200', description: 'FireCrest build number')
+        string(name: 'fc_ui_bn', defaultValue: '100', description: 'FireCrest UI build number')
     }
     stages {
 
