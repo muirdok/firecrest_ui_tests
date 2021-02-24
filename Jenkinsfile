@@ -1,7 +1,3 @@
-def PowerShell(psCmd) {
-    psCmd=psCmd.replaceAll("%", "%%")
-    bat "powershell.exe -NonInteractive -ExecutionPolicy Bypass -Command \"\$ErrorActionPreference='Stop';[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;$psCmd;EXIT \$global:LastExitCode\""
-}
 APPALINCE_IP = 'initial_value'
 
 pipeline {
@@ -14,6 +10,7 @@ pipeline {
             steps {
               node('master') {
                 deleteDir()
+                git branch: 'main',
                 git url: 'https://github.com/muirdok/firecrest_ui_tests'
                 dir("${WORKSPACE}") {
                   sh '''
@@ -38,16 +35,30 @@ pipeline {
     }
     stage ('Deploy FireCrest UI') {
       steps {
-        sh '''
-        echo "docker run UI"
-        '''
-      }
-    }
+        node('docker') {
+          deleteDir()
+          git branch: 'main',
+          git url: 'https://github.com/muirdok/firecrest_ui_tests'
+          dir("${WORKSPACE}") {
+            sh '''
+            echo "docekr run fc ui container"
+            '''
+              }
+            }
+          }
+  }
     stage ('Run tests') {
       steps {
-        sh '''
-        echo "docker run cypress"
-        '''
+        node('docker') {
+          deleteDir()
+          git branch: 'main',
+          git url: 'https://github.com/muirdok/firecrest_ui_tests'
+          dir("${WORKSPACE}") {
+            sh '''
+            echo "docekr run fc ui tests"
+            '''
+          }
+        }
       }
     }
   }
