@@ -43,6 +43,7 @@ pipeline {
                                  echo "ansible run pxe install"
                                  '''
                                }
+        }
       }
     }
   }
