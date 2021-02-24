@@ -46,34 +46,4 @@ pipeline {
       }
     }
   }
-
-    stage ('Deploy FireCrest UI') {
-      steps {
-        node('docker') {
-          deleteDir()
-          git branch: 'main',
-          git url: 'https://github.com/muirdok/firecrest_ui_tests'
-          dir("${WORKSPACE}") {
-            sh '''
-            echo "docekr run fc ui container"
-            '''
-              }
-            }
-          }
-  }
-    stage ('Run tests') {
-      steps {
-        node('docker') {
-          deleteDir()
-          git branch: 'main',
-          git url: 'https://github.com/muirdok/firecrest_ui_tests'
-          dir("${WORKSPACE}") {
-            sh '''
-            echo "docekr run fc ui tests"
-            '''
-          }
-        }
-      }
-    }
-  }
 }
