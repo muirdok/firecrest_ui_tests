@@ -1,0 +1,29 @@
+---
+
+#ad oarams
+ad_admin: "hadmin"
+ad_admin_pass: "Nexenta1!"
+ad_name: "nex2019.test"
+ad_ip: "10.3.69.80"
+
+#testrails and napalm parameters
+napalm_user: "georgy.malakyan"
+napalm_pass: "GM@Nexru462"
+config_ci_build: "deploy_test_bed"
+config_ci_delay: 10
+config_applaince_disk: "c"
+publish: False
+testrail_settings_path: "/tmp/"
+old_testrun: 4948
+new_testrun: 5241
+
+#smbtorture403
+config_applaince_root: "root"
+config_applaince_root_pass: "plusultra"
+config_applaince_admin: "admin"
+config_applaince_admin_pass: "nexenta"
+config_applaince_pool: "kek"
+config_applaince_pool_fs: "fs1"
+config_applaince_cifs_share: "kek_fs1"
+
+...
