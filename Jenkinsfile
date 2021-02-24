@@ -37,7 +37,8 @@ pipeline {
              steps {
                node('master') {
                  deleteDir()
-                 git url: 'git@github.com:muirdok/firecrest_ui_tests.git'
+                 git url: 'git@github.com:muirdok/firecrest_ui_tests.git',
+                 git branch: 'main',
                  dir("${WORKSPACE}") {
                                  sh '''
                                  echo "ansible run pxe install"
