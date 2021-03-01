@@ -19,7 +19,7 @@ new_testrun: 5241
 
 #smbtorture403
 config_applaince_root: "root"
-config_applaince_root_pass: "plusultra"
+config_applaince_root_pass: "nexenta"
 config_applaince_admin: "admin"
 config_applaince_admin_pass: "nexenta"
 config_applaince_pool: "kek"
