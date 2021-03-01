@@ -53,10 +53,10 @@
           num_cpus: 4
           scsi: lsilogic
         networks:
-        - name: "{{ config_vm_net2 }}"
+        - name: "{{ config_vm_10G }}"
           mac: "{{ MAC_firecrest | community.general.random_mac }}"
           device_type: vmxnet3
-        - name: "{{ config_vm_net1 }}"
+        - name: "{{ config_vm_1G }}"
           device_type: vmxnet3
         wait_for_ip_address: True
         wait_for_ip_address_timeout: 1200

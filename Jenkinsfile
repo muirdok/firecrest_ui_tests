@@ -5,6 +5,8 @@ pipeline {
     parameters {
         string(name: 'fc_bn', defaultValue: '200', description: 'FireCrest build number')
         string(name: 'fc_ui_bn', defaultValue: '100', description: 'FireCrest UI build number')
+        string(name: 'FC_VM', defaultValue: 'firecrest_test_ui_', description: 'FireCrest VM Prefix')
+
     }
     stages {
 
@@ -17,11 +19,11 @@ pipeline {
                    ansiblePlaybook(
                      playbook: 'ansible/deploy_fc.yml',
                      extraVars: [
-                        config_vm_name: params.VM_NAME + "_" + env.BUILD_NUMBER,
+                        config_vm_name: params.FC_VM + "_" + env.BUILD_NUMBER,
                           ]
                         )
                         script {
-                          def FILENAME = params.VM_NAME + "_" + env.BUILD_NUMBER + ".ipv4"
+                          def FILENAME = params.FC_VM + "_" + env.BUILD_NUMBER + ".ipv4"
                           APPALINCE_IP = readFile "ansible/${FILENAME}"
                           println(FILENAME)
                           println(APPALINCE_IP)
