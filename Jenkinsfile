@@ -49,7 +49,7 @@ pipeline {
                                  #
                                  # Run firecrest-fusion container on 10.3.69.31 docker host
                                  docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 \
-                                 -v /opt/docker/fusion:/var/lib/nef \
+                                 # -v /opt/docker/fusion:/var/lib/nef \
                                  tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
                                  '''
                                }
@@ -64,8 +64,8 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh '''
-                                 echo "Cypress run FireCrest UI tests against https://10.3.69.31 /
-                                 e.g. https://firecrest-fusion:8457 and ${APPALINCE_IP} /
+                                 echo "Cypress run FireCrest UI tests against https://10.3.69.31:8457 /
+                                 e.g. https://firecrest-fusion:8457 and applaine: ${APPALINCE_IP} /
                                  in docekr"
                                  '''
                                }
