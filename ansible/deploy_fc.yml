@@ -93,18 +93,18 @@
         ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 
 # Configure and join to AD part
-- hosts: "{{ config_vm_name }}"
-  gather_facts: yes
-  user: "{{ config_applaince_root }}"
-  vars_files:
-    - vars/common.yaml
-  tasks:
-  - name: Create FS
-    shell: zfs create {{config_applaince_pool}}/{{config_applaince_pool_fs}}
-
-  - name: Share FS
-    shell: zfs set sharesmb=on {{config_applaince_pool}}/{{config_applaince_pool_fs}}
-
-  - name: Give all ACL's
-    shell: chmod 777 /{{config_applaince_pool}}/{{config_applaince_pool_fs}}
+# - hosts: "{{ config_vm_name }}"
+#   gather_facts: yes
+#   user: "{{ config_applaince_root }}"
+#   vars_files:
+#     - vars/common.yaml
+#   tasks:
+#   - name: Create FS
+#     shell: zfs create {{config_applaince_pool}}/{{config_applaince_pool_fs}}
+#
+#   - name: Share FS
+#     shell: zfs set sharesmb=on {{config_applaince_pool}}/{{config_applaince_pool_fs}}
+#
+#   - name: Give all ACL's
+#     shell: chmod 777 /{{config_applaince_pool}}/{{config_applaince_pool_fs}}
 ...

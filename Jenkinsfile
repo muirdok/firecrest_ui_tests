@@ -5,7 +5,7 @@ pipeline {
     parameters {
         string(name: 'fc_bn', defaultValue: '200', description: 'FireCrest build number')
         string(name: 'fc_ui_bn', defaultValue: '100', description: 'FireCrest UI build number')
-        string(name: 'FC_VM', defaultValue: 'firecrest_test_ui_', description: 'FireCrest VM Prefix')
+        string(name: 'FC_VM', defaultValue: 'firecrest_test_ui', description: 'FireCrest VM Prefix')
 
     }
     stages {
