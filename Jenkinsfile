@@ -44,7 +44,7 @@ pipeline {
                                  #
                                  # Clear  old containers and get new
                                  docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
-                                 docker rmi tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
+                                 docker rmi tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest || true
                                  docker pull tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
                                  #
                                  # Run firecrest-fusion container on 10.3.69.31 docker host
