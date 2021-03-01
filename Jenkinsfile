@@ -64,7 +64,9 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh '''
-                                 echo "docker run FireCrest UI tests against https://10.3.69.31 e.g. https://firecrest-fusion:8457"
+                                 echo "Cypress run FireCrest UI tests against https://10.3.69.31 /
+                                 e.g. https://firecrest-fusion:8457 and ${APPALINCE_IP} /
+                                 in docekr"
                                  '''
                                }
                              }
