@@ -14,9 +14,18 @@ pipeline {
                  deleteDir()
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
-                                 sh '''
-                                 echo "ansible run pxe install"
-                                 '''
+                   ansiblePlaybook(
+                     playbook: 'ansible/deploy_fc.yml',
+                     extraVars: [
+                        config_vm_name: params.VM_NAME + "_" + env.BUILD_NUMBER,
+                          ]
+                        )
+                        script {
+                          def FILENAME = params.VM_NAME + "_" + env.BUILD_NUMBER + ".ipv4"
+                          APPALINCE_IP = readFile "ansible/${FILENAME}"
+                          println(FILENAME)
+                          println(APPALINCE_IP)
+                                }
                                }
                              }
                            }
