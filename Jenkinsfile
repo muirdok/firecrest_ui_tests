@@ -48,8 +48,8 @@ pipeline {
                                  docker pull tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
                                  #
                                  # Run firecrest-fusion container on 10.3.69.31 docker host
-                                 docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 \
                                  # -v /opt/docker/fusion:/var/lib/nef \
+                                 docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 \
                                  tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
                                  '''
                                }
