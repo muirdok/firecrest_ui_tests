@@ -40,17 +40,12 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh '''
-                                 echo "Go docker! Go!"
+                                 echo "Go docker! Go on https://10.3.69.31:8457!"
                                  #
-                                 # Clear  old containers and get new
                                  docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
                                  docker rmi tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest || true
                                  docker pull tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
-                                 #
-                                 # Run firecrest-fusion container on 10.3.69.31 docker host
-                                 # -v /opt/docker/fusion:/var/lib/nef \
-                                 docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 \
-                                 tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
+                                 docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
                                  '''
                                }
                              }
