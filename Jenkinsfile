@@ -61,12 +61,8 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh '''
-                                 echo "Cypress run FireCrest UI tests against https://10.3.69.31:8457 /
-                                 e.g. https://firecrest-fusion:8457 and applaine: ${APPALINCE_IP} /
-                                 in docekr"
-                                 docker run -it -v $PWD:/e2e -w /e2e cypress/included:6.6.0 \
-                                 --config baseUrl=http://host.docker.internal::8457 \
-                                 -e fc_applaince=${APPALINCE_IP}
+                                 echo "Cypress run FireCrest UI tests against ${APPALINCE_IP}
+                                 docker run -it -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=http://host.docker.internal::8457 -e fc_applaince=${APPALINCE_IP}
                                  '''
                                }
                              }
