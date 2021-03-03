@@ -59,7 +59,7 @@ pipeline {
                  dir("${WORKSPACE}") {
                                  sh '''
                                  echo "Cypress run FireCrest UI tests against ${APPALINCE_IP"
-                                 docker run -it -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=http://host.docker.internal::8457 -e fc_applaince=${APPALINCE_IP}
+                                 #docker run -it -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=http://host.docker.internal::8457 -e fc_applaince=${APPALINCE_IP}
                                  '''
                                }
                              }
