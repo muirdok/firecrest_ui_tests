@@ -27,7 +27,7 @@ describe('My First Test', () => {
 
     cy.contains('Add Appliance').click()
 
-    cy.get('#ipInput').type("192.168.1.1")
+    cy.get('#ipInput').type(Cypress.env('fc_applaince'))
 
     cy.get('.port-container > .uwf-btn')
     .should('not.be.disabled')
