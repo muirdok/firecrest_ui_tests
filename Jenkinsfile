@@ -41,12 +41,9 @@ pipeline {
                  dir("${WORKSPACE}") {
                                  sh '''
                                  echo "Go docker! Go on https://10.3.69.31:8457!"
-                                 echo "Clean it up"
                                  docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
                                  docker rmi tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest || true
-                                 echo "Get new image"
                                  docker pull tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
-                                 echo "Run new container"
                                  docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
                                  '''
                                }
@@ -61,7 +58,7 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh '''
-                                 echo "Cypress run FireCrest UI tests against ${APPALINCE_IP}
+                                 echo "Cypress run FireCrest UI tests against ${APPALINCE_IP"
                                  docker run -it -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=http://host.docker.internal::8457 -e fc_applaince=${APPALINCE_IP}
                                  '''
                                }
