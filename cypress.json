@@ -1,1 +1,9 @@
-{}
+{
+  "projectId": "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxz",
+  "env": {
+    "login_url": "/login",
+    "products_url": "/products",
+    "def_login" "admin",
+    "def_pass" "fusion",
+  }
+}
