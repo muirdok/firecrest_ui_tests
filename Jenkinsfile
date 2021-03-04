@@ -1,4 +1,4 @@
-APPALINCE_IP = 'initial_value'
+//APPALINCE_IP = 'initial_value'
 
 pipeline {
     agent { label 'master' }
@@ -36,11 +36,9 @@ pipeline {
                         )
                         script {
                           def FILENAME = params.VM_PREFIX + "_" + env.BUILD_NUMBER + ".ipv4"
-                          //def APPALINCE_IP = readFile "ansible/${FILENAME}"
-                          env.APPALINCE_IP = sh(returnStdout: true, script: 'cat ansible/\${FILENAME}').trim()
+                          def APPALINCE_IP = readFile "ansible/${FILENAME}"
+                          //env.APPALINCE_IP = sh(returnStdout: true, script: 'cat ansible/\${FILENAME}').trim()
                           println(APPALINCE_IP)
-                          println(env.APPALINCE_IP)
-
                                 }
                                }
                              }
@@ -53,14 +51,14 @@ pipeline {
                  deleteDir()
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
-                                 sh '''
+                                 sh """
                                  printenv
                                  echo "Go docker! Go on ${FUSION_URL} and ${APPALINCE_IP}
                                  docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
                                  docker rmi ${FUSION_IMAGE} || true
                                  docker pull ${FUSION_IMAGE}
                                  docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 ${FUSION_IMAGE}
-                                 '''
+                                 """
                                }
                              }
                            }
@@ -72,11 +70,11 @@ pipeline {
                  deleteDir()
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
-                                 sh '''
+                                 sh """
                                  printenv
                                  echo Cypress run FireCrest UI tests against ${APPALINCE_IP}
                                  docker run -i -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=${FUSION_URL} -e fc_applaince=${APPALINCE_IP}
-                                 '''
+                                 """
                                }
                              }
                            }
