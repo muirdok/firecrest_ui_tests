@@ -50,7 +50,6 @@ pipeline {
                  deleteDir()
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
-                                 ls -lah
                                  sh """
                                  printenv
                                  echo "Go docker! Go on ${FUSION_URL} and ${APPLIANCE_IP}"
