@@ -6,9 +6,6 @@ pipeline {
         string(name: 'fc_bn', defaultValue: '200', description: 'FireCrest build number')
         string(name: 'fc_ui_bn', defaultValue: '100', description: 'FireCrest UI build number')
         string(name: 'FC_VM', defaultValue: 'firecrest_test_ui', description: 'FireCrest VM Prefix')
-        string(name: 'APPALINCE_IP', defaultValue: '192.168.1.1', description: 'FireCrest VM IP')
-
-
     }
     stages {
 
@@ -26,9 +23,9 @@ pipeline {
                         )
                         script {
                           def FILENAME = params.FC_VM + "_" + env.BUILD_NUMBER + ".ipv4"
-                          params.APPALINCE_IP = readFile "ansible/${FILENAME}"
-                          println(FILENAME)
-                          println(params.APPALINCE_IP)
+                          def APPALINCE_IP = readFile "ansible/${FILENAME}"
+                          //println(FILENAME)
+                          println(APPALINCE_IP)
                                 }
                                }
                              }
@@ -61,8 +58,8 @@ pipeline {
                  dir("${WORKSPACE}") {
                                  sh '''
                                  printenv
-                                 echo "Cypress run FireCrest UI tests against $params.APPALINCE_IP"
-                                 docker run -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=https://10.3.69.31:8457 -e fc_applaince=$APPALINCE_IP
+                                 echo Cypress run FireCrest UI tests against ${APPALINCE_IP}
+                                 docker run -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=https://10.3.69.31:8457 -e fc_applaince=${APPALINCE_IP}
                                  '''
                                }
                              }
