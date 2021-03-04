@@ -59,7 +59,7 @@ pipeline {
                                  sh '''
                                  printenv
                                  echo Cypress run FireCrest UI tests against ${APPALINCE_IP}
-                                 docker run -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=https://10.3.69.31:8457 -e fc_applaince=${APPALINCE_IP}
+                                 docker run -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl="https://10.3.69.31:8457" -e fc_applaince=${APPALINCE_IP}
                                  '''
                                }
                              }
