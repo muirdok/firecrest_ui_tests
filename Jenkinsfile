@@ -24,7 +24,7 @@ pipeline {
                         )
                         script {
                           def FILENAME = params.FC_VM + "_" + env.BUILD_NUMBER + ".ipv4"
-                          def env.APPALINCE_IP = readFile "ansible/${FILENAME}"
+                          env.APPALINCE_IP = readFile "ansible/${FILENAME}"
                           println(FILENAME)
                           println(env.APPALINCE_IP)
                                 }
