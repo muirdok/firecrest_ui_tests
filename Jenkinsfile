@@ -37,7 +37,6 @@ pipeline {
                         script {
                           def FILENAME = params.VM_PREFIX + "_" + env.BUILD_NUMBER + ".ipv4"
                           def APPALINCE_IP = readFile "ansible/${FILENAME}"
-                          //env.APPALINCE_IP = sh(returnStdout: true, script: 'cat ansible/\${FILENAME}').trim()
                           println(APPALINCE_IP)
                                 }
                                }
