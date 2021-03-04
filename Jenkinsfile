@@ -2,10 +2,23 @@ APPALINCE_IP = 'initial_value'
 
 pipeline {
     agent { label 'master' }
+
+    environment {
+      //RESULTS_DIR = "/tmp/fusion-test-results/${env.JOB_NAME}/${env.BUILD_NUMBER}"
+      //RESULTS_LINK = "http://10.3.199.126/${env.JOB_NAME}/${env.BUILD_NUMBER}/"
+      //DOCKER_92 = credentials('solutions-docker-92')
+      //DOCKER_HUB = credentials('docker-hub-credentials')
+      DOCKER_HOST = 10.3.69.31
+      FUSION_URL = "https://${DOCKER_HOST}:8457"
+      FUSION_IMAGE = 'tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest'
+      TOKEN = "9D4230B1-FD39-47CE-920F-024F0ED52F07"
+    }
+
     parameters {
-        string(name: 'fc_bn', defaultValue: '200', description: 'FireCrest build number')
-        string(name: 'fc_ui_bn', defaultValue: '100', description: 'FireCrest UI build number')
-        string(name: 'FC_VM', defaultValue: 'firecrest_test_ui', description: 'FireCrest VM Prefix')
+        string(name: 'FC_NUMBER', defaultValue: '200', description: 'FireCrest build number')
+        string(name: 'APPALINCE_IP', defaultValue: '192.168.1.1', description: 'Applaince IP Address')
+        string(name: 'FC_UI_NUMBER', defaultValue: '100', description: 'FireCrest UI build number')
+        string(name: 'VM_PREFIX', defaultValue: 'firecrest_test_ui', description: 'FireCrest VM Prefix')
     }
     stages {
 
@@ -18,13 +31,16 @@ pipeline {
                    ansiblePlaybook(
                      playbook: 'ansible/deploy_fc.yml',
                      extraVars: [
-                        config_vm_name: params.FC_VM + "_" + env.BUILD_NUMBER,
+                        config_vm_name: params.VM_PREFIX + "_" + env.BUILD_NUMBER,
                           ]
                         )
                         script {
-                          def FILENAME = params.FC_VM + "_" + env.BUILD_NUMBER + ".ipv4"
-                          def APPALINCE_IP = readFile "ansible/${FILENAME}"
+                          def FILENAME = params.VM_PREFIX + "_" + env.BUILD_NUMBER + ".ipv4"
+                          //def APPALINCE_IP = readFile "ansible/${FILENAME}"
+                          env.APPALINCE_IP = sh(returnStdout: true, script: 'cat ansible/${FILENAME}').trim()
                           println(APPALINCE_IP)
+                          println(env.APPALINCE_IP)
+
                                 }
                                }
                              }
@@ -39,11 +55,11 @@ pipeline {
                  dir("${WORKSPACE}") {
                                  sh '''
                                  printenv
-                                 echo "Go docker! Go on https://10.3.69.31:8457 and ${APPALINCE_IP} and $APPALINCE_IP and APPALINCE_IP"
+                                 echo "Go docker! Go on ${FUSION_URL} and ${APPALINCE_IP}
                                  docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
-                                 docker rmi tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest || true
-                                 docker pull tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
-                                 docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
+                                 docker rmi ${FUSION_IMAGE} || true
+                                 docker pull ${FUSION_IMAGE}
+                                 docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 ${FUSION_IMAGE}
                                  '''
                                }
                              }
@@ -59,7 +75,7 @@ pipeline {
                                  sh '''
                                  printenv
                                  echo Cypress run FireCrest UI tests against ${APPALINCE_IP}
-                                 docker run -i -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl="https://10.3.69.31:8457" -e fc_applaince=${APPALINCE_IP}
+                                 docker run -i -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=${FUSION_URL} -e fc_applaince=${APPALINCE_IP}
                                  '''
                                }
                              }
