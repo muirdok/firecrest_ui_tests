@@ -39,7 +39,7 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh '''
-                                 echo "Go docker! Go on https://10.3.69.31:8457"
+                                 echo "Go docker! Go on https://10.3.69.31:8457 and ${APPALINCE_IP}"
                                  docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
                                  docker rmi tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest || true
                                  docker pull tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest
