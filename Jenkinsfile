@@ -9,8 +9,8 @@ pipeline {
       //RESULTS_LINK = "http://10.3.199.126/${env.JOB_NAME}/${env.BUILD_NUMBER}/"
       //DOCKER_92 = credentials('solutions-docker-92')
       //DOCKER_HUB = credentials('docker-hub-credentials')
-      DOCKER_HOST = "10.3.69.31"
-      FUSION_URL = "https://${DOCKER_HOST}:8457"
+      MA_DOCKER_HOST = "10.3.69.31"
+      FUSION_URL = "https://${MA_DOCKER_HOST}:8457"
       FUSION_IMAGE = "tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest"
       FUSION_CONTAINER = "firecrest-fusion"
       TOKEN = "9D4230B1-FD39-47CE-920F-024F0ED52F07"
