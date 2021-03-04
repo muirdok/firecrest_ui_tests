@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 describe('My First Test', () => {
   it('clicking "type" shows the right headings', () => {
-    cy.visit()
+    cy.visit(Cypress.env('url'))
 
     //cy.pause()
     cy.wait(2000)
