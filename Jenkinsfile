@@ -1,4 +1,5 @@
-//APPALINCE_IP = 'initial_value'
+APPLIANCE_IP = 'initial_value'
+
 
 pipeline {
     agent { label 'master' }
@@ -35,7 +36,7 @@ pipeline {
                         )
                         script {
                           def FILENAME = params.VM_PREFIX + "_" + env.BUILD_NUMBER + ".ipv4"
-                          def APPLIANCE_IP = readFile "ansible/${FILENAME}"
+                          APPLIANCE_IP = readFile "ansible/${FILENAME}"
                           println(APPLIANCE_IP)
                                 }
                                }
@@ -49,6 +50,7 @@ pipeline {
                  deleteDir()
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
+                                 ls -lah
                                  sh """
                                  printenv
                                  echo "Go docker! Go on ${FUSION_URL} and ${APPLIANCE_IP}"
