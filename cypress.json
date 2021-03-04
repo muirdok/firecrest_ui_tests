@@ -5,6 +5,6 @@
     "products_url": "/products",
     "def_login": "admin",
     "def_pass": "fusion",
-    "fc_applaince": "192.168.1.1",
+    "fc_applaince": "192.168.1.1"
   }
 }
