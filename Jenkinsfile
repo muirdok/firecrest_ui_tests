@@ -24,9 +24,9 @@ pipeline {
                         )
                         script {
                           def FILENAME = params.FC_VM + "_" + env.BUILD_NUMBER + ".ipv4"
-                          env.APPALINCE_IP = readFile "ansible/${FILENAME}"
+                          def APPALINCE_IP = readFile "ansible/${FILENAME}"
                           println(FILENAME)
-                          println(env.APPALINCE_IP)
+                          println(APPALINCE_IP)
                                 }
                                }
                              }
@@ -58,8 +58,8 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh '''
-                                 echo "Cypress run FireCrest UI tests against env.APPALINCE_IP"
-                                 docker run -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=https://10.3.69.31:8457 -e fc_applaince=$env.APPALINCE_IP
+                                 echo "Cypress run FireCrest UI tests against ${APPALINCE_IP}"
+                                 docker run -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=https://10.3.69.31:8457 -e fc_applaince=${APPALINCE_IP}
                                  '''
                                }
                              }
