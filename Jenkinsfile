@@ -11,7 +11,8 @@ pipeline {
       //DOCKER_HUB = credentials('docker-hub-credentials')
       DOCKER_HOST = "10.3.69.31"
       FUSION_URL = "https://${DOCKER_HOST}:8457"
-      FUSION_IMAGE = 'tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest'
+      FUSION_IMAGE = "tintri-dockerv2-local.jfrog.io/firecrest-fusion_develop:latest"
+      FUSION_CONTAINER = "firecrest-fusion"
       TOKEN = "9D4230B1-FD39-47CE-920F-024F0ED52F07"
     }
 
@@ -51,12 +52,11 @@ pipeline {
                  git branch: 'main', url: 'git@github.com:muirdok/firecrest_ui_tests.git'
                  dir("${WORKSPACE}") {
                                  sh """
-                                 printenv
                                  echo "Go docker! Go on ${FUSION_URL} and ${APPLIANCE_IP}"
-                                 docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
+                                 docker stop ${FUSION_CONTAINER} || true && docker rm ${FUSION_CONTAINER} || true
                                  docker rmi ${FUSION_IMAGE} || true
                                  docker pull ${FUSION_IMAGE}
-                                 docker run -d --name firecrest-fusion -p 8457:8457 -p 8443:8443 ${FUSION_IMAGE}
+                                 docker run -d --name ${FUSION_CONTAINER} -p 8457:8457 -p 8443:8443 ${FUSION_IMAGE}
                                  """
                                }
                              }
