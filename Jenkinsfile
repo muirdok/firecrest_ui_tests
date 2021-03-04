@@ -16,7 +16,6 @@ pipeline {
 
     parameters {
         string(name: 'FC_NUMBER', defaultValue: '200', description: 'FireCrest build number')
-        string(name: 'APPALINCE_IP', defaultValue: '192.168.1.1', description: 'Applaince IP Address')
         string(name: 'FC_UI_NUMBER', defaultValue: '100', description: 'FireCrest UI build number')
         string(name: 'VM_PREFIX', defaultValue: 'firecrest_test_ui', description: 'FireCrest VM Prefix')
     }
@@ -36,8 +35,8 @@ pipeline {
                         )
                         script {
                           def FILENAME = params.VM_PREFIX + "_" + env.BUILD_NUMBER + ".ipv4"
-                          def APPALINCE_IP = readFile "ansible/${FILENAME}"
-                          println(APPALINCE_IP)
+                          def APPLIANCE_IP = readFile "ansible/${FILENAME}"
+                          println(APPLIANCE_IP)
                                 }
                                }
                              }
@@ -52,7 +51,7 @@ pipeline {
                  dir("${WORKSPACE}") {
                                  sh """
                                  printenv
-                                 echo "Go docker! Go on ${FUSION_URL} and ${APPALINCE_IP}
+                                 echo "Go docker! Go on ${FUSION_URL} and ${APPLIANCE_IP}"
                                  docker stop firecrest-fusion || true && docker rm firecrest-fusion || true
                                  docker rmi ${FUSION_IMAGE} || true
                                  docker pull ${FUSION_IMAGE}
@@ -71,8 +70,8 @@ pipeline {
                  dir("${WORKSPACE}") {
                                  sh """
                                  printenv
-                                 echo Cypress run FireCrest UI tests against ${APPALINCE_IP}
-                                 docker run -i -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=${FUSION_URL} -e fc_applaince=${APPALINCE_IP}
+                                 echo Cypress run FireCrest UI tests against ${APPLIANCE_IP}
+                                 docker run -i -v $PWD:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=${FUSION_URL} -e fc_applaince=${APPLIANCE_IP}
                                  """
                                }
                              }
