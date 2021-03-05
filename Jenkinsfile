@@ -71,7 +71,7 @@ pipeline {
                  dir("${WORKSPACE}") {
                                  sh """
                                  echo Cypress run FireCrest UI tests against ${APPLIANCE_IP}
-                                 docker run --tty -v ${env.WORKSPACE}:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=${FUSION_URL} -e fc_applaince=${APPLIANCE_IP}
+                                 docker run -v ${env.WORKSPACE}:/e2e -w /e2e cypress/included:6.6.0 --config baseUrl=${FUSION_URL} -e fc_applaince=${APPLIANCE_IP}
                                  """
                                }
                              }
