@@ -75,7 +75,7 @@ pipeline {
                                  npm install cypress --save-dev
                                  ./node_modules/.bin/cypress run
                                  mkdir ~/results/${env.BUILD_NUMBER}
-                                 cp -a cypress/{videos,screenshots} ~/results/${env.BUILD_NUMBER}/
+                                 cp -a cypress/videos ~/results/${env.BUILD_NUMBER}/
                                  """
                                }
                              }
