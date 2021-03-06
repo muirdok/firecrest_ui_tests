@@ -96,7 +96,7 @@
 - hosts: "{{ config_vm_name }}"
   gather_facts: yes
   user: "{{ config_applaince_root }}"
-    vars_files:
+  vars_files:
      - vars/common.yaml
   tasks:
   - name: Enable NODE worker
