@@ -1,11 +1,15 @@
 {
   "projectId": "128076ed-9868-4e98-9cef-98dd8b705d75",
   "env": {
+    "docker_ip": "10.3.69.31",
+    "cypress_ip": "10.3.69.32",
     "url": "https://10.3.69.31:8457",
+    "fc_applaince_ip": "10.3.75.57",
     "login_url": "/login",
     "products_url": "/products",
     "def_login": "admin",
     "def_pass": "fusion",
-    "fc_applaince": "192.168.1.1"
-  }
+    "fc_def_login": "admin",
+    "fc_def_pass": "nexenta"
+    }
 }
