@@ -4,7 +4,7 @@
     "docker_ip": "10.3.69.31",
     "cypress_ip": "10.3.69.32",
     "url": "https://10.3.69.31:8457",
-    "fc_applaince_ip": "10.3.75.57",
+    "fc_applaince_ip": "10.3.75.64",
     "login_url": "/login",
     "products_url": "/products",
     "def_login": "admin",

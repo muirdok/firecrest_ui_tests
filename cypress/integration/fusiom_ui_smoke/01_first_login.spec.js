@@ -43,6 +43,8 @@ describe('My First Test', () => {
     .should('not.be.disabled')
     .click()
 
+    cy.wait(3000)
+
     cy.get('.node__details__host', { timeout: 10000 })
     .should('be.visible')
 
