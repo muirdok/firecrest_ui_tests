@@ -57,6 +57,7 @@ pipeline {
                                  docker rmi ${FUSION_IMAGE} || true
                                  docker pull ${FUSION_IMAGE}
                                  docker run -d --name ${FUSION_CONTAINER} -p 8457:8457 -p 8443:8443 ${FUSION_IMAGE}
+                                 sleep 20
                                  """
                                }
                              }
